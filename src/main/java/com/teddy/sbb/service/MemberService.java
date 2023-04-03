@@ -2,14 +2,17 @@ package com.teddy.sbb.service;
 
 import com.teddy.sbb.domain.Member;
 import com.teddy.sbb.repository.MemberRepository;
-import com.teddy.sbb.repository.MemoryMemberRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
+//커맨드 + 시프트 + t = 새 테스트 생성
+    private  final MemberRepository memberRepository;
 
-    private  final MemberRepository memberRepository = new MemoryMemberRepository();
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원가입
