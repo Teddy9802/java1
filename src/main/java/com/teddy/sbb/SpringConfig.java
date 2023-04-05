@@ -1,6 +1,6 @@
 package com.teddy.sbb;
 
-import com.teddy.sbb.repository.JdbcMemberRepository;
+import com.teddy.sbb.repository.JdbcTemplateMemberRepository;
 import com.teddy.sbb.repository.MemberRepository;
 import com.teddy.sbb.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,8 @@ public class SpringConfig {
 
     @Bean
     public MemberRepository memberRepository() {
-      //  return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+        //  return new MemoryMemberRepository();
+        //  return new JdbcMemberRepository(dataSource);
+        return  new JdbcTemplateMemberRepository(dataSource);
     }
 }
