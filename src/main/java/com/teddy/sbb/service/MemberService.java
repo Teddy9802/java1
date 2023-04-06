@@ -26,9 +26,20 @@ public class MemberService {
         //커멘드 + 옵션 + v = 자동 리턴
         //컨트롤 + t = 관련 리팩터링 생성
         //ifPresent => 어떤 값이 있으면 얘가 동작함(옵셔널이기 떄문에 가능)
-        validateDuplicateMember(member); //중복 회원 검증
-        memberRepository.save(member);
-        return member.getId();
+
+        long start = System.currentTimeMillis();
+
+        try{
+            validateDuplicateMember(member); //중복 회원 검증
+            memberRepository.save(member);
+            return member.getId();
+        }finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
+
+
     }
 
     private void validateDuplicateMember(Member member) {
@@ -41,7 +52,15 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers() {
-        return memberRepository.findAll();
+        long start = System.currentTimeMillis();
+        try {
+            return memberRepository.findAll();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("findMembers = " + timeMs + "ms");
+        }
+
     }
 
     public Optional<Member> findOne(Long memberId) {
